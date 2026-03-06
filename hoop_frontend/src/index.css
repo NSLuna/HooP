@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;600&display=swap');
+
+:root {
+  --ink:       #1a1d24;
+  --ink-2:     #3a3f4b;
+  --ink-3:     #717785;
+  --canvas:    #f0ede8;
+  --surface:   #faf8f5;
+  --border:    #e4e1da;
+  --accent:    #2563ff;
+
+  --accent:        #2563ff;
+  --accent-light:  #eef2ff;
+  --green:         #16a34a;
+  --green-light:   #edfbf1;
+  --amber:         #d97706;
+  --amber-light:   #fef9ee;
+  --red:           #dc2626;
+  --red-light:     #fff1f1;
+  --teal:          #0d9488;
+  --teal-light:    #edfafa;
+}
+
+body {
+  margin: 0;
+  font-family: 'Gowun Dodum', sans-serif;
+  background-color: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea, select {
+  font-family: inherit;
+}
+
+h1, h2, h3, .modal-title, .logo-text, .topbar-title {
+  font-family: 'Jua', sans-serif;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+}
