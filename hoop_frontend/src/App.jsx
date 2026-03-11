@@ -4,34 +4,80 @@ import Sidebar from './components/Sidebar'
 import Topbar from './components/Topbar'  
 import MainContent from './components/MainContent'
 import NewTaskModal from './components/NewTaskModal'
+import NewMeetingModal from './components/NewMeetingModal'
+import Dashboard from './pages/Dashboard'
+import Meetings from './pages/Meetings'
 
 function App() {
   const [tasks, setTasks] = useState([])
-  
-  // 1. 테스트용 유저 데이터
+  const [meetings, setMeetings] = useState([]) // 📝 회의록 담을 바구니 추가!
   const [user, setUser] = useState({ name: '루나', role: '개발자' })
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // 🔘 각각의 모달을 여는 전용 스위치들!
+  const [isModalOpen, setIsModalOpen] = useState(false); // 업무용
+  const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false); // 회의록용
+  
+  const [currentView, setCurrentView] = useState('home');
+  const [isDark, setIsDark] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    document.documentElement.setAttribute('data-theme', !isDark ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/api/tasks/')
       .then(res => setTasks(res.data))
       .catch(err => console.error(err))
   }, [])
-
+    
   return (
     <div className="hoop-app" style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
-      <Sidebar />
+      {/* 1. 사이드바 (업무 모달 스위치 연결) */}
+      <Sidebar 
+        currentView={currentView} 
+        setCurrentView={setCurrentView} 
+        user={user} 
+        projects={[]} 
+        onOpenModal={() => setIsModalOpen(true)} 
+      />
+      
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        {/* 2. 탑바 (업무 모달 스위치 연결) */}
+        <Topbar 
+          user={user} 
+          onOpenModal={() => setIsModalOpen(true)} 
+          currentView={currentView} 
+          isDark={isDark} 
+          toggleTheme={toggleTheme} 
+        />
         
-        <Topbar user={user} onOpenModal={() => setIsModalOpen(true)} />
-        
-        <MainContent userName={user.name} tasks={tasks} />
+        {/* 3. 메인 콘텐츠가 나오는 방 */}
+        <div style={{ flex: 1, overflowY: 'auto' }}>
+          {currentView === 'home' && <MainContent userName={user.name} tasks={tasks} />}
+          {currentView === 'dashboard' && <Dashboard tasks={tasks} />}
+          
+          {/* 👶 회의록 전용 스위치를 전달했어요! */}
+          {currentView === 'meetings' && (
+            <Meetings 
+              meetings={meetings} 
+              onOpenMeetingModal={() => setIsMeetingModalOpen(true)} 
+            />
+          )}
+          
+          {/* 🚧 공사 중 표시 (나머지 화면들) */}
+          {currentView !== 'home' && currentView !== 'dashboard' && currentView !== 'meetings' && (
+            <div style={{ padding: '50px', textAlign: 'center', color: '#717785' }}>
+              <h1 style={{ fontSize: '24px', marginBottom: '10px' }}>🚧 {currentView} 화면 공사 중! 🚧</h1>
+              <p>아르테가 열심히 코드를 굽고 있어요!</p>
+            </div>
+          )}
+        </div>
       </div>
 
-      <NewTaskModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
+      {/* 4. 마법의 모달 창들 (서로 다른 스위치를 써요!) */}
+      <NewTaskModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <NewMeetingModal isOpen={isMeetingModalOpen} onClose={() => setIsMeetingModalOpen(false)} />
     </div>
   )
 }
