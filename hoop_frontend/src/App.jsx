@@ -10,10 +10,9 @@ import Meetings from './pages/Meetings'
 
 function App() {
   const [tasks, setTasks] = useState([])
-  const [meetings, setMeetings] = useState([]) // 📝 회의록 담을 바구니 추가!
+  const [meetings, setMeetings] = useState([])
   const [user, setUser] = useState({ name: '루나', role: '개발자' })
   
-  // 🔘 각각의 모달을 여는 전용 스위치들!
   const [isModalOpen, setIsModalOpen] = useState(false); // 업무용
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false); // 회의록용
   
@@ -57,7 +56,7 @@ function App() {
           {currentView === 'home' && <MainContent userName={user.name} tasks={tasks} />}
           {currentView === 'dashboard' && <Dashboard tasks={tasks} />}
           
-          {/* 👶 회의록 전용 스위치를 전달했어요! */}
+          {/* 회의록 전용 스위치를 전달했어요! */}
           {currentView === 'meetings' && (
             <Meetings 
               meetings={meetings} 
@@ -69,13 +68,12 @@ function App() {
           {currentView !== 'home' && currentView !== 'dashboard' && currentView !== 'meetings' && (
             <div style={{ padding: '50px', textAlign: 'center', color: '#717785' }}>
               <h1 style={{ fontSize: '24px', marginBottom: '10px' }}>🚧 {currentView} 화면 공사 중! 🚧</h1>
-              <p>아르테가 열심히 코드를 굽고 있어요!</p>
+              <p>열심히 개발중이에요!</p>
             </div>
           )}
         </div>
       </div>
 
-      {/* 4. 마법의 모달 창들 (서로 다른 스위치를 써요!) */}
       <NewTaskModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <NewMeetingModal isOpen={isMeetingModalOpen} onClose={() => setIsMeetingModalOpen(false)} />
     </div>

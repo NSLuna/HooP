@@ -4,7 +4,7 @@ function NewTaskModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
   const [priority, setPriority] = useState('중간');
 
-  // 모달이 새로 열릴 때마다 1단계로 싹 초기화해 주는 마법!
+  // 모달이 새로 열릴 때마다 1단계로 싹 초기화
   useEffect(() => {
     if (isOpen) {
       setStep(1);
@@ -104,7 +104,6 @@ function NewTaskModal({ isOpen, onClose }) {
                   <div style={{ display: 'flex', gap: '6px' }}>
                     {['낮음', '중간', '높음'].map(p => {
                       const isSelected = p === priority;
-                      // 앗! 가끔 색깔 변수가 비어있을까 봐 아르테가 안전망을 하나 추가했어!
                       const activeColor = priorityStyle[p]?.color || 'var(--ink)';
                       const activeBg = priorityStyle[p]?.bg || 'var(--surface-2)';
 
@@ -140,7 +139,7 @@ function NewTaskModal({ isOpen, onClose }) {
           )}
         </div>
 
-        {/* 3. 푸터 (단계별로 버튼도 슉슉 바뀝니다!) */}
+        {/* 3. 푸터 */}
         <div style={{ padding: '14px 22px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', gap: '8px' }}>
             {/* 2단계에서만 '이전' 버튼 보여주기 */}

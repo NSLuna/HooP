@@ -1,4 +1,3 @@
-// src/components/Sidebar.jsx
 import React from 'react';
 
 function Sidebar({ currentView, setCurrentView, projects = [], onOpenModal }) {
@@ -37,7 +36,6 @@ function Sidebar({ currentView, setCurrentView, projects = [], onOpenModal }) {
         <div style={{ fontSize: '11px', color: 'var(--ink-3)', marginBottom: '12px', letterSpacing: '1px', padding: '0 12px' }}>프로젝트</div>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           
-          {/* 👶 가짜 글자 대신 진짜 프로젝트 데이터가 여기서 반복해서 예쁘게 나와요! */}
           {projects.map(proj => (
             <li 
               key={proj.id}
@@ -54,7 +52,6 @@ function Sidebar({ currentView, setCurrentView, projects = [], onOpenModal }) {
             </li>
           ))}
 
-          {/* ✨ 루나가 원했던 항상 떠 있는 '새 프로젝트 추가' 버튼! */}
           <li 
             onClick={onOpenModal}
             style={{ 

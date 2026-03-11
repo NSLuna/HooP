@@ -4,7 +4,7 @@ function NewMeetingModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
   const [title, setTitle] = useState('');
   
-  // 👶 오늘 날짜 기본값 세팅!
+  // 오늘 날짜 기본값 세팅!
   const today = new Date().toISOString().split('T')[0];
   const [date, setDate] = useState(today);
   
@@ -13,7 +13,7 @@ function NewMeetingModal({ isOpen, onClose }) {
   const [currentAgenda, setCurrentAgenda] = useState('');
   const [content, setContent] = useState('');
 
-  // 🚨 오늘 이전 날짜인지 체크하는 예리한 눈!
+  // 오늘 이전 날짜인지 체크
   const isPastDate = date !== '' && date < today;
 
   useEffect(() => {
@@ -80,7 +80,7 @@ function NewMeetingModal({ isOpen, onClose }) {
                     max="9999-12-31"
                     style={{ ...inputBaseStyle, border: isPastDate ? '1.5px solid var(--red)' : '1.5px solid var(--border)' }} 
                   />
-                  {/* ✨ 날짜 경고 마법 부활! */}
+                  {/*  날짜 경고! */}
                   {isPastDate && (
                     <div style={{ color: 'var(--red)', fontSize: '10px', marginTop: '2px', fontWeight: 500 }}>
                       이전 날짜로는 회의를 만들 수 없어요!
@@ -124,7 +124,7 @@ function NewMeetingModal({ isOpen, onClose }) {
           )}
         </div>
 
-        {/* 푸터 (✨ 루나의 완벽한 삼형제 배치!) */}
+        {/* 푸터 */}
         <div style={{ padding: '14px 20px', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
           {step === 1 ? (
             <>
@@ -136,7 +136,7 @@ function NewMeetingModal({ isOpen, onClose }) {
               <button onClick={onClose} style={{ ...btnBaseStyle, background: 'transparent', color: 'var(--ink-3)' }}>
                 취소
               </button>
-              {/* 3. 저장하기 (✨ 비활성화 시에도 잘 보이게!) */}
+              {/* 3. 저장하기 (비활성화 시에도 잘 보이게!) */}
               <button 
                 onClick={() => setStep(2)} 
                 disabled={isPastDate || !title}

@@ -1,9 +1,8 @@
-// src/pages/Dashboard.jsx
 import React from 'react';
 
 function Dashboard({ tasks = [] }) {
   
-  // (임시로 상태가 없으면 그냥 전체 개수로 보여주게 안전망!)
+  // (임시로 상태가 없으면 그냥 전체 개수)
   const totalTasks = tasks.length;
   const inProgressCount = tasks.filter(t => t.status === '진행중' || !t.completed).length || totalTasks;
   const doneCount = tasks.filter(t => t.status === '완료' || t.completed).length || 0;
@@ -19,7 +18,6 @@ function Dashboard({ tasks = [] }) {
         
         <div style={{ background: 'var(--surface)', padding: '24px', borderRadius: '16px', border: '1px solid var(--border)', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
           <div style={{ fontSize: '13px', color: 'var(--ink-3)', marginBottom: '12px', fontWeight: 'bold' }}>🚀 진행 중인 업무</div>
-          {/* 가짜 12 대신 진짜 계산된 숫자! */}
           <div style={{ fontSize: '36px', fontWeight: 'bold', color: 'var(--accent)' }}>{inProgressCount}</div>
         </div>
         
