@@ -62,7 +62,7 @@ function NewTaskModal({ isOpen, onClose }) {
             </>
           )}
 
-          {/* 2단계: 업무 생성 화면 (루나가 만든 코드 그대로!) */}
+          {/* 2단계: 업무 생성 화면*/}
           {step === 2 && (
             <>
               <input type="text" placeholder="업무 제목을 입력하세요" 

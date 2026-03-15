@@ -3,38 +3,62 @@
 :root {
   --ink:       #1a1d24;
   --ink-2:     #3a3f4b;
-  --ink-3:     #717785;
+  --ink-3:     #adb5bd;
   --canvas:    #f0ede8;
-  --surface:   #faf8f5;
+  --surface:   #faf8f5; 
   --border:    #e4e1da;
   --accent:    #2563ff;
-
-  --accent:        #2563ff;
-  --accent-light:  #eef2ff;
-  --green:         #16a34a;
-  --green-light:   #edfbf1;
-  --amber:         #d97706;
-  --amber-light:   #fef9ee;
-  --red:           #dc2626;
-  --red-light:     #fff1f1;
-  --teal:          #0d9488;
-  --teal-light:    #edfafa;
+  --bg-sidebar:#1a1d24;
 }
 
+[data-theme='dark'] {
+  --ink:       #ffffff; 
+  --ink-2:     #e4e1da;
+  --ink-3:     #adb5bd;
+  
+  --canvas:    #1a1d24; 
+  --surface:   #0d0f12; 
+  
+  --border:    #2d333d;
+  --accent:    #3b82f6;
+}
+
+/* 전체 레이아웃 */
 body {
   margin: 0;
   font-family: 'Gowun Dodum', sans-serif;
   background-color: var(--canvas);
   color: var(--ink);
-  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-input, button, textarea, select {
-  font-family: inherit;
+.sidebar {
+  width: 260px;
+  background-color: var(--surface) !important;
+  border-right: 1px solid var(--border) !important;
+  color: var(--ink) !important;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  transition: all 0.3s ease;
 }
 
-h1, h2, h3, .modal-title, .logo-text, .topbar-title {
-  font-family: 'Jua', sans-serif;
-  font-weight: normal;
-  letter-spacing: 0.5px;
+@media (max-width: 1024px) {
+  .sidebar { width: 200px; }
+}
+
+@media (max-width: 768px) {
+  .hoop-app {
+    flex-direction: column !important; 
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .sidebar {
+    width: 100% !important;
+    height: auto !important;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 15px;
+  }
 }

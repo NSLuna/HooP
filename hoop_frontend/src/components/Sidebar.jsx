@@ -9,7 +9,7 @@ function Sidebar({ currentView, setCurrentView, projects = [], onOpenModal }) {
   ];
 
   return (
-    <nav style={{ width: '240px', background: 'var(--ink)', color: 'white', height: '100vh', padding: '24px 16px', display: 'flex', flexDirection: 'column' }}>
+    <nav style={{ width: '240px', background: 'var(--bg-sidebar)', color: 'white', height: '100vh', padding: '24px 16px', display: 'flex', flexDirection: 'column' }}>
       <div style={{ fontFamily: 'Fraunces, serif', fontSize: '22px', marginBottom: '40px', color: 'var(--accent)', padding: '0 12px' }}>
         Hoop
       </div>
@@ -39,7 +39,6 @@ function Sidebar({ currentView, setCurrentView, projects = [], onOpenModal }) {
           {projects.map(proj => (
             <li 
               key={proj.id}
-              // 프로젝트를 누르면 'project-1' 같은 이름으로 스위치가 켜져요!
               onClick={() => setCurrentView(`project-${proj.id}`)}
               style={{ 
                 padding: '10px 12px', borderRadius: '8px', cursor: 'pointer', display: 'flex', gap: '8px', alignItems: 'center',

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const MenuItem = ({ icon, title, desc }) => (
   <div style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}>
@@ -16,28 +17,34 @@ function Topbar({ user, onOpenModal, currentView, isDark, toggleTheme }) {
   const titles = { home: '홈', dashboard: '대시보드', schedule: '일정표', meetings: '회의록', search: '검색' };
 
   return (
-    <header style={{ 
-      height: '60px', background: 'var(--surface)', borderBottom: '1px solid var(--border)', 
-      display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px',
-      position: 'sticky', top: 0, zIndex: 10
+    <header className="topbar" style={{ 
+      background: 'var(--surface)', borderBottom: '1px solid var(--border)', 
+      position: 'sticky', top: 0, zIndex: 10,
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
+      padding: '0 32px', height: '60px', width: '100%', boxSizing: 'border-box'
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <div className="left" style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
         <span style={{ color: 'var(--ink-3)', fontSize: '18px' }}>☰</span>
         <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 600, color: 'var(--ink)', fontFamily: 'DM Sans, sans-serif' }}>
           {titles[currentView] || '프로젝트'}
         </h2>
       </div>
-      
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <div style={{ position: 'relative' }}>
+
+
+
+      {/* 3. 오른쪽 구역 */}
+      <div className="actions" style={{ display: 'flex', alignItems: 'center', gap: '16px', flexShrink: 0 }}>
+
+      <div className="search-bar" style={{ position: 'relative', width: '240px' }}>
           <input type="text" placeholder="검색..." style={{ 
             padding: '8px 16px 8px 36px', borderRadius: '12px', border: '1px solid var(--border)',
-            background: 'var(--canvas)', fontSize: '13px', width: '240px', outline: 'none'
+            background: 'var(--canvas)', color: 'var(--ink)', fontSize: '13px', outline: 'none',
+            width: '100%', boxSizing: 'border-box'
           }} />
           <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--ink-3)' }}>⊙</span>
         </div>
-        
-        {/* ✨ 꿈틀거림 방지! width를 70px로 딱 고정했어요! */}
+
+
         <div onClick={toggleTheme} style={{ 
           display: 'flex', alignItems: 'center', justifyContent: 'center', width: '70px', 
           padding: '5px 0', borderRadius: '20px', background: 'var(--surface-2)', 
@@ -46,7 +53,7 @@ function Topbar({ user, onOpenModal, currentView, isDark, toggleTheme }) {
           <span style={{ fontSize: '12px', color: 'var(--ink-3)', fontWeight: 'bold' }}>{isDark ? '다크' : '라이트'}</span>
         </div>
 
-        <div style={{ display: 'flex', gap: '12px', color: 'var(--ink-3)', fontSize: '18px'}}>
+        <div style={{ display: 'flex', gap: '12px', color: 'var(--ink-3)', fontSize: '18px', position: 'relative'}}>
           <span style={{ cursor: 'pointer' }}>🔔</span>
           <span style={{ cursor: 'pointer' }} onClick={() => setIsDropdownOpen(!isDropdownOpen)}>⚙️</span>
           
@@ -88,19 +95,21 @@ function Topbar({ user, onOpenModal, currentView, isDark, toggleTheme }) {
         <button onClick={onOpenModal} style={{
           background: 'var(--accent)', color: 'white', border: 'none', borderRadius: '10px', 
           padding: '8px 16px', fontWeight: 600, fontSize: '13px', cursor: 'pointer',
-          boxShadow: '0 4px 12px rgba(37, 99, 255, 0.15)'
+          boxShadow: '0 4px 12px rgba(37, 99, 255, 0.15)',
+          whiteSpace: 'nowrap'
         }}>
           + 새 업무 추가
         </button>
 
-        <a href="http://127.0.0.1:8000/admin/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+        <Link to="/admin" style={{ textDecoration: 'none' }}>
           <button style={{
-            background: 'var(--ink)', color: 'white', border: 'none', borderRadius: '10px', 
-            padding: '8px 16px', fontWeight: 600, fontSize: '13px', cursor: 'pointer'
+            background: 'var(--bg-sidebar)', color: 'white', border: '1px solid var(--border)', borderRadius: '10px', 
+            padding: '8px 16px', fontWeight: 600, fontSize: '13px', cursor: 'pointer',
+            whiteSpace: 'nowrap'
           }}>
             ⚙️ 관리자
           </button>
-        </a>
+        </Link>
       </div>
     </header>
   );
